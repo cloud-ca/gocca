@@ -1,0 +1,254 @@
+services/cloudca/zone_test.go:21:12: string `zoneid` has 2 occurrences, make it a constant (goconst)
+	zoneId := "zoneid"
+	          ^
+services/cloudca/compute_offering_test.go:30:10: string `[` has 14 occurrences, make it a constant (goconst)
+	resp := `[`
+	        ^
+services/cloudca/compute_offering_test.go:34:12: string `,` has 14 occurrences, make it a constant (goconst)
+			resp += `,`
+			        ^
+services/cloudca/network_acl_rule_test.go:120:17: string `rule_1` has 2 occurrences, make it a constant (goconst)
+	expectedId1 := "rule_1"
+	               ^
+services/cloudca/network_acl_rule_test.go:205:22: string `4321` has 2 occurrences, make it a constant (goconst)
+	id1, id2 := "1234", "4321"
+	                    ^
+services/cloudca/compute_offering_test.go:37:10: string `]` has 14 occurrences, make it a constant (goconst)
+	resp += `]`
+	        ^
+services/cloudca/network_acl_rule_test.go:81:16: string `rule_0` has 2 occurrences, make it a constant (goconst)
+	expectedId := "rule_0"
+	              ^
+services/cloudca/network_acl_rule_test.go:243:16: string `adsf` has 3 occurrences, make it a constant (goconst)
+	expectedId := "adsf"
+	              ^
+services/cloudca/network_acl_rule_test.go:319:16: string `id0` has 3 occurrences, make it a constant (goconst)
+	expectedId := "id0"
+	              ^
+configuration/configuration.go:64: line is 143 characters (lll)
+//Create as described in the body parameter (json object). Returns a []byte (of a json object) that should be unmarshalled to a specific entity
+configuration/configuration.go:81: line is 156 characters (lll)
+//Update specified id as described in the body parameter (json object). Returns a []byte (of a json object) that should be unmarshalled to a specific entity
+configuration/configuration.go:98: line is 170 characters (lll)
+//Delete. A body (json object) can be provided if some fields must be sent to server. Returns a []byte (of a json object) that should be unmarshalled to a specific entity
+configuration/environment_test.go:34: line is 156 characters (lll)
+                 "serviceConnection":{"id":"73983e63-e404-48aa-a89c-f41ca93af9cd","category":"IAAS","name":"patDev1","serviceCode":"dev1","type":"CloudCA"},
+configuration/environment_test.go:38: line is 191 characters (lll)
+                          {"id":"517b40e5-20a8-44f0-a5d0-06ed20ee4d43","users":[{"id":"062445f9-11d3-4e7b-9a84-908272a72250","userName":"pdube"}],"isDefault":false,"name":"Environment Admin"}
+configuration/environment_test.go:107: line is 156 characters (lll)
+                 "serviceConnection":{"id":"73983e63-e404-48aa-a89c-f41ca93af9cd","category":"IAAS","name":"patDev1","serviceCode":"dev1","type":"CloudCA"},
+configuration/environment_test.go:111: line is 191 characters (lll)
+                          {"id":"517b40e5-20a8-44f0-a5d0-06ed20ee4d43","users":[{"id":"062445f9-11d3-4e7b-9a84-908272a72250","userName":"pdube"}],"isDefault":false,"name":"Environment Admin"}
+services/entity.go:99: line is 153 characters (lll)
+//Create a new entity described in the body parameter (json object). Returns a []byte (of a json object) that should be unmarshalled to a specific entity
+services/entity.go:116: line is 165 characters (lll)
+//Update entity with specified id described in the body parameter (json object). Returns a []byte (of a json object) that should be unmarshalled to a specific entity
+services/entity.go:133: line is 193 characters (lll)
+//Delete specified id described. A body (json object) can be provided if some fields must be sent to server. Returns a []byte (of a json object) that should be unmarshalled to a specific entity
+services/cloudca/load_balancer_rule.go:121: line is 147 characters (lll)
+func (api *LoadBalancerRuleApi) SetLoadBalancerRuleStickinessPolicy(id string, method string, stickinessPolicyParameters map[string]string) error {
+services/cloudca/compute_offering_test.go:58: line is 143 characters (lll)
+	mockEntityService.EXPECT().Get(TEST_COMPUTE_OFFERING_ID, gomock.Any()).Return(buildComputeOfferingJsonResponse(&expectedComputeOffering), nil)
+services/cloudca/instance_test.go:525: line is 141 characters (lll)
+	mockEntityService.EXPECT().Execute(TEST_INSTANCE_ID, INSTANCE_RECOVER_OPERATION, gomock.Any(), gomock.Any()).Return([]byte(`{}`), mockError)
+services/cloudca/instance_test.go:588: line is 145 characters (lll)
+	mockEntityService.EXPECT().Execute(TEST_INSTANCE_ID, INSTANCE_ASSOCIATE_SSH_KEY_OPERATION, gomock.Any(), gomock.Any()).Return([]byte(`{}`), nil)
+services/cloudca/instance_test.go:609: line is 151 characters (lll)
+	mockEntityService.EXPECT().Execute(TEST_INSTANCE_ID, INSTANCE_ASSOCIATE_SSH_KEY_OPERATION, gomock.Any(), gomock.Any()).Return([]byte(`{}`), mockError)
+services/cloudca/instance_test.go:635: line is 151 characters (lll)
+	mockEntityService.EXPECT().Execute(TEST_INSTANCE_ID, INSTANCE_CHANGE_COMPUTE_OFFERING_OPERATION, gomock.Any(), gomock.Any()).Return([]byte(`{}`), nil)
+services/cloudca/instance_test.go:656: line is 157 characters (lll)
+	mockEntityService.EXPECT().Execute(TEST_INSTANCE_ID, INSTANCE_CHANGE_COMPUTE_OFFERING_OPERATION, gomock.Any(), gomock.Any()).Return([]byte(`{}`), mockError)
+services/cloudca/instance_test.go:682: line is 167 characters (lll)
+	mockEntityService.EXPECT().Execute(TEST_INSTANCE_ID, INSTANCE_RESET_PASSWORD_OPERATION, gomock.Any(), gomock.Any()).Return([]byte(`{"password":"new_password"}`), nil)
+services/cloudca/instance_test.go:703: line is 148 characters (lll)
+	mockEntityService.EXPECT().Execute(TEST_INSTANCE_ID, INSTANCE_RESET_PASSWORD_OPERATION, gomock.Any(), gomock.Any()).Return([]byte(`{}`), mockError)
+services/cloudca/instance_test.go:724: line is 149 characters (lll)
+	mockEntityService.EXPECT().Execute(TEST_INSTANCE_ID, INSTANCE_CREATE_RECOVERY_POINT_OPERATION, gomock.Any(), gomock.Any()).Return([]byte(`{}`), nil)
+services/cloudca/instance_test.go:745: line is 155 characters (lll)
+	mockEntityService.EXPECT().Execute(TEST_INSTANCE_ID, INSTANCE_CREATE_RECOVERY_POINT_OPERATION, gomock.Any(), gomock.Any()).Return([]byte(`{}`), mockError)
+services/cloudca/public_ip_test.go:246: line is 147 characters (lll)
+	mockEntityService.EXPECT().Execute(TEST_PUBLIC_IP_ID, PUBLIC_IP_ENABLE_STATIC_NAT_OPERATION, gomock.Any(), gomock.Any()).Return([]byte(`{}`), nil)
+services/cloudca/public_ip_test.go:272: line is 153 characters (lll)
+	mockEntityService.EXPECT().Execute(TEST_PUBLIC_IP_ID, PUBLIC_IP_ENABLE_STATIC_NAT_OPERATION, gomock.Any(), gomock.Any()).Return([]byte(`{}`), mockError)
+services/cloudca/public_ip_test.go:294: line is 148 characters (lll)
+	mockEntityService.EXPECT().Execute(TEST_PUBLIC_IP_ID, PUBLIC_IP_DISABLE_STATIC_NAT_OPERATION, gomock.Any(), gomock.Any()).Return([]byte(`{}`), nil)
+services/cloudca/public_ip_test.go:315: line is 154 characters (lll)
+	mockEntityService.EXPECT().Execute(TEST_PUBLIC_IP_ID, PUBLIC_IP_DISABLE_STATIC_NAT_OPERATION, gomock.Any(), gomock.Any()).Return([]byte(`{}`), mockError)
+services/cloudca/remote_access_vpn_test.go:190: line is 144 characters (lll)
+	mockEntityService.EXPECT().Execute(TEST_VPN_ID, REMOTE_ACCESS_VPN_ENABLE_OPERATION, gomock.Any(), gomock.Any()).Return([]byte(`{}`), mockError)
+services/cloudca/remote_access_vpn_test.go:233: line is 145 characters (lll)
+	mockEntityService.EXPECT().Execute(TEST_VPN_ID, REMOTE_ACCESS_VPN_DISABLE_OPERATION, gomock.Any(), gomock.Any()).Return([]byte(`{}`), mockError)
+services/cloudca/remote_access_vpn_user_test.go:52: line is 147 characters (lll)
+	mockEntityService.EXPECT().Get(TEST_VPN_USER_ID, gomock.Any()).Return(buildTestRemoteAccessVpnUserJsonResponse(&expectedRemoteAccessVpnUser), nil)
+api/response.go:61:16: Error return value of `json.Unmarshal` is not checked (errcheck)
+	json.Unmarshal(respBody, &responseMap)
+	              ^
+api/response.go:64:17: Error return value of `json.Unmarshal` is not checked (errcheck)
+		json.Unmarshal(*val, &ccaResponse.TaskId)
+		              ^
+api/response.go:68:17: Error return value of `json.Unmarshal` is not checked (errcheck)
+		json.Unmarshal(*val, &ccaResponse.TaskStatus)
+		              ^
+configuration/organization_test.go:72:15: composites: `github.com/cloud-ca/go-cloudca/mocks.MockError` composite literal uses unkeyed fields (govet)
+	mockError := mocks.MockError{"some_get_error"}
+	             ^
+configuration/organization_test.go:137:15: composites: `github.com/cloud-ca/go-cloudca/mocks.MockError` composite literal uses unkeyed fields (govet)
+	mockError := mocks.MockError{"some_list_error"}
+	             ^
+configuration/service_connection_test.go:66:15: composites: `github.com/cloud-ca/go-cloudca/mocks.MockError` composite literal uses unkeyed fields (govet)
+	mockError := mocks.MockError{"some_get_error"}
+	             ^
+services/cloudca/template.go:15:2: structtag: struct field tag `json:availablePublicly` not compatible with reflect.StructTag.Get: bad syntax for struct tag value (govet)
+	AvailablePublicly bool     `json:availablePublicly`
+	^
+client.go:11:2: don't use ALL_CAPS in Go names; use CamelCase (golint)
+	DEFAULT_API_URL = "https://api.cloud.ca/v1/"
+	^
+client.go:14:6: type name will be used as cca.CcaClient by other packages, and that stutters; consider calling this Client (golint)
+type CcaClient struct {
+     ^
+client.go:40:6: func NewCcaClientWithApiClient should be NewCcaClientWithAPIClient (golint)
+func NewCcaClientWithApiClient(apiClient api.ApiClient) *CcaClient {
+     ^
+client.go:60:20: method GetApiURL should be GetAPIURL (golint)
+func (c CcaClient) GetApiURL() string {
+                   ^
+client.go:65:20: method GetApiKey should be GetAPIKey (golint)
+func (c CcaClient) GetApiKey() string {
+                   ^
+client.go:70:20: method GetApiClient should be GetAPIClient (golint)
+func (c CcaClient) GetApiClient() api.ApiClient {
+                   ^
+api/api.go:12:6: type `ApiClient` should be `APIClient` (golint)
+type ApiClient interface {
+     ^
+api/api.go:18:6: type `CcaApiClient` should be `CcaAPIClient` (golint)
+type CcaApiClient struct {
+     ^
+api/api.go:24:7: don't use ALL_CAPS in Go names; use CamelCase (golint)
+const API_KEY_HEADER = "MC-Api-Key"
+      ^
+api/api.go:26:6: func NewApiClient should be NewAPIClient (golint)
+func NewApiClient(apiURL, apiKey string) ApiClient {
+     ^
+api/api.go:34:6: func NewInsecureApiClient should be NewInsecureAPIClient (golint)
+func NewInsecureApiClient(apiURL, apiKey string) ApiClient {
+     ^
+api/api.go:46:31: method buildUrl should be buildURL (golint)
+func (ccaClient CcaApiClient) buildUrl(endpoint string, options map[string]string) string {
+                              ^
+api/api.go:82:31: method GetApiKey should be GetAPIKey (golint)
+func (ccaClient CcaApiClient) GetApiKey() string {
+                              ^
+api/api.go:86:31: method GetApiURL should be GetAPIURL (golint)
+func (ccaClient CcaApiClient) GetApiURL() string {
+                              ^
+api/response.go:14:2: don't use ALL_CAPS in Go names; use CamelCase (golint)
+	MUTIPLE_CHOICES = 300
+	^
+api/response.go:28:2: struct field `TaskId` should be `TaskID` (golint)
+	TaskId     string
+	^
+api/response.go:45:15: should omit type string from declaration of var errorStr; it will be inferred from the right-hand side (golint)
+	var errorStr string = "[ERROR] Received HTTP status code " + strconv.Itoa(errorResponse.StatusCode) + "\n"
+	             ^
+configuration/configuration.go:7:6: type name will be used as configuration.ConfigurationService by other packages, and that stutters; consider calling this Service (golint)
+type ConfigurationService interface {
+     ^
+configuration/configuration.go:16:6: type `ConfigurationApi` should be `ConfigurationAPI` (golint)
+type ConfigurationApi struct {
+     ^
+configuration/environment.go:14:2: struct field `Id` should be `ID` (golint)
+	Id                string            `json:"id,omitempty"`
+	^
+configuration/environment.go:32:6: type `EnvironmentApi` should be `EnvironmentAPI` (golint)
+type EnvironmentApi struct {
+     ^
+configuration/organization.go:10:2: struct field `Id` should be `ID` (golint)
+	Id           string        `json:"id,omitempty"`
+	^
+configuration/organization.go:24:6: type `OrganizationApi` should be `OrganizationAPI` (golint)
+type OrganizationApi struct {
+     ^
+configuration/organization_test.go:22:6: func buildOrganizationJsonResponse should be buildOrganizationJSONResponse (golint)
+func buildOrganizationJsonResponse(organization *Organization) []byte {
+     ^
+configuration/organization_test.go:27:6: func buildListOrganizationJsonResponse should be buildListOrganizationJSONResponse (golint)
+func buildListOrganizationJsonResponse(organizations []Organization) []byte {
+     ^
+configuration/role.go:4:2: struct field `Id` should be `ID` (golint)
+	Id           string       `json:"id,omitempty"`
+	^
+configuration/service_connection.go:20:6: type `ServiceConnectionApi` should be `ServiceConnectionAPI` (golint)
+type ServiceConnectionApi struct {
+     ^
+configuration/service_connection.go:31:2: don't use underscores in Go names; var `service_connection` should be `serviceConnection` (golint)
+	service_connection := ServiceConnection{}
+	^
+configuration/service_connection.go:37:2: don't use underscores in Go names; var `service_connections` should be `serviceConnections` (golint)
+	service_connections := []ServiceConnection{}
+	^
+configuration/service_connection_test.go:19:6: func buildServiceConnectionJsonResponse should be buildServiceConnectionJSONResponse (golint)
+func buildServiceConnectionJsonResponse(serviceConnection *ServiceConnection) []byte {
+     ^
+configuration/service_connection_test.go:24:6: func buildListServiceConnectionJsonResponse should be buildListServiceConnectionJSONResponse (golint)
+func buildListServiceConnectionJsonResponse(serviceConnections []ServiceConnection) []byte {
+     ^
+configuration/user.go:21:6: type `UserApi` should be `UserAPI` (golint)
+type UserApi struct {
+     ^
+services/entity.go:18:6: type `EntityApi` should be `EntityAPI` (golint)
+type EntityApi struct {
+     ^
+services/task.go:39:6: type `TaskApi` should be `TaskAPI` (golint)
+type TaskApi struct {
+     ^
+services/cloudca/affinity_groups.go:25:6: type `AffinityGroupApi` should be `AffinityGroupAPI` (golint)
+type AffinityGroupApi struct {
+     ^
+services/cloudca/compute_offering.go:13:2: struct field `CpuCount` should be `CPUCount` (golint)
+	CpuCount   int    `json:"cpuCount,omitempty"`
+	^
+services/cloudca/compute_offering.go:23:6: type `ComputeOfferingApi` should be `ComputeOfferingAPI` (golint)
+type ComputeOfferingApi struct {
+     ^
+services/cloudca/compute_offering_test.go:21:6: func buildComputeOfferingJsonResponse should be buildComputeOfferingJSONResponse (golint)
+func buildComputeOfferingJsonResponse(computeOffering *ComputeOffering) []byte {
+     ^
+services/cloudca/compute_offering_test.go:29:6: func buildListComputeOfferingJsonResponse should be buildListComputeOfferingJSONResponse (golint)
+func buildListComputeOfferingJsonResponse(computeOfferings []ComputeOffering) []byte {
+     ^
+services/cloudca/disk_offering.go:26:6: type `DiskOfferingApi` should be `DiskOfferingAPI` (golint)
+type DiskOfferingApi struct {
+     ^
+services/cloudca/disk_offering_test.go:19:6: func buildDiskOfferingJsonResponse should be buildDiskOfferingJSONResponse (golint)
+func buildDiskOfferingJsonResponse(diskOffering *DiskOffering) []byte {
+     ^
+services/cloudca/disk_offering_test.go:25:6: func buildListDiskOfferingJsonResponse should be buildListDiskOfferingJSONResponse (golint)
+func buildListDiskOfferingJsonResponse(diskOfferings []DiskOffering) []byte {
+     ^
+services/cloudca/instance.go:32:2: struct field `TemplateId` should be `TemplateID` (golint)
+	TemplateId               string        `json:"templateId,omitempty"`
+	^
+services/cloudca/instance.go:39:2: struct field `ComputeOfferingId` should be `ComputeOfferingID` (golint)
+	ComputeOfferingId        string        `json:"computeOfferingId,omitempty"`
+	^
+services/cloudca/instance.go:41:2: struct field `NewComputeOfferingId` should be `NewComputeOfferingID` (golint)
+	NewComputeOfferingId     string        `json:"newComputeOfferingId,omitempty"`
+	^
+services/cloudca/instance.go:42:2: struct field `CpuCount` should be `CPUCount` (golint)
+	CpuCount                 int           `json:"cpuCount,omitempty"`
+	^
+services/cloudca/instance.go:44:2: struct field `ZoneId` should be `ZoneID` (golint)
+	ZoneId                   string        `json:"zoneId,omitempty"`
+	^
+services/cloudca/instance.go:46:2: struct field `ProjectId` should be `ProjectID` (golint)
+	ProjectId                string        `json:"projectId,omitempty"`
+	^
+services/cloudca/instance.go:47:2: struct field `NetworkId` should be `NetworkID` (golint)
+	NetworkId                string        `json:"networkId,omitempty"`
+	^
+services/cloudca/instance.go:49:2: struct field `VpcId` should be `VpcID` (golint)
+	VpcId                    string        `json:"vpcId,omitempty"`
+	^

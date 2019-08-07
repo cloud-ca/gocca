@@ -1,0 +1,43 @@
+run:
+  deadline: 5m
+  tests: true
+  # skip-dirs:
+  #   - test/testdata_etc
+  #   - pkg/golinters/goanalysis/(checker|passes)
+
+linters:
+  disable-all: true
+  enable:
+    - govet
+    - golint
+    - goconst
+    - misspell
+    - lll
+    - varcheck
+    - structcheck
+    - staticcheck
+    - errcheck
+    - unconvert
+    # - unused
+    # - goimports
+
+linters-settings:
+  govet:
+    check-shadowing: true
+  golint:
+    min-confidence: 0.8
+  goconst:
+    min-len: 2
+    min-occurrences: 2
+  misspell:
+    locale: US
+  lll:
+    line-length: 140
+  # unused:
+  #   check-exported: false
+  # goimports:
+  #   local-prefixes: github.com/cloud-ca/terraform-provider-cloudca
+
+# issues:
+#   exclude:
+#     - "`getResources` is unused"
