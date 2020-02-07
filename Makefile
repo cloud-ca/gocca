@@ -8,16 +8,24 @@ LICENSE     := MIT
 # Build variables
 BUILD_DIR   := bin
 COMMIT_HASH := $(shell git rev-parse --short HEAD 2>/dev/null)
-VERSION     := $(shell git describe --tags --exact-match 2>/dev/null || git describe --tags 2>/dev/null || echo "v0.0.0-$(COMMIT_HASH)")
+GIT_VERSION := $(shell git describe --tags --exact-match 2>/dev/null || git describe --tags 2>/dev/null || echo "v0.0.0-$(COMMIT_HASH)")
 BUILD_DATE  := $(shell date +%FT%T%z)
 
 # Go variables
-GOPKGS      := $(shell go list ./... | grep -v /vendor)
-GOFILES     := $(shell find . -type f -name '*.go' -not -path "./vendor/*")
+GOCMD       := GO111MODULE=on go
+MODVENDOR   := -mod=vendor
+GOPKGS      ?= $(shell $(GOCMD) list $(MODVENDOR) ./... | grep -v /vendor)
+GOFILES     ?= $(shell find . -type f -name '*.go' -not -path "./vendor/*")
 
-# General variables
-BLUE_COLOR  := \033[36m
-NO_COLOR    := \033[0m
+GOBUILD     ?= GOOS=$(GOOS) GOARCH=$(GOARCH) $(GOCMD) build $(MODVENDOR)
+GORUN       ?= GOOS=$(GOOS) GOARCH=$(GOARCH) $(GOCMD) run $(MODVENDOR)
+
+# Binary versions
+GITCHGLOG_VERSION := 0.9.1
+GOLANGCI_VERSION  := v1.23.1
+
+.PHONY: all
+all: clean verify checkfmt lint test
 
 .PHONY: version
 version: ## Show version of provider
@@ -27,72 +35,98 @@ version: ## Show version of provider
 ## Development targets ##
 #########################
 .PHONY: clean
-clean: log-clean ## Clean builds
+clean: ## Clean builds
+	@ $(MAKE) --no-print-directory log-$@
 	rm -rf ./$(BUILD_DIR) $(NAME)
 
 .PHONY: vendor
-vendor: log-vendor ## Install 'vendor' dependencies
-	GO111MODULE=on go mod vendor
+vendor: ## Install 'vendor' dependencies
+	@ $(MAKE) --no-print-directory log-$@
+	$(GOCMD) mod vendor
 
 .PHONY: verify
-verify: log-verify ## Verify 'vendor' dependencies
-	GO111MODULE=on go mod verify
+verify: ## Verify 'vendor' dependencies
+	@ $(MAKE) --no-print-directory log-$@
+	$(GOCMD) mod verify
+
+.PHONY: tidy
+tidy: ## Tidy up 'vendor' dependencies
+	@ $(MAKE) --no-print-directory log-$@
+	$(GOCMD) mod tidy
 
 .PHONY: lint
-lint: log-lint ## Run linter
-	@bash -c "GO111MODULE=off gometalinter -d ./... 2> >(egrep '(^DEBUG.*linter took|^DEBUG.*total elapsed|^[^D])' >&2)"
+lint: ## Run linter
+	@ $(MAKE) --no-print-directory log-$@
+	GO111MODULE=on golangci-lint run ./...
 
-.PHONY: format
-format: log-format ## Format all go files
-	go fmt $(GOPKGS)
+.PHONY: fmt
+fmt: ## Format all go files
+	@ $(MAKE) --no-print-directory log-$@
+	goimports -w $(GOFILES)
 
 .PHONY: checkfmt
-checkfmt: SHELL :=/bin/bash
-checkfmt: RESULT = $(shell gofmt -l $(GOFILES) | tee >(if [ "$$(wc -l)" = 0 ]; then echo "OK"; fi))
-checkfmt: log-checkfmt ## Check formatting of all go files
-	@echo "$(RESULT)"
-	@if [ "$(RESULT)" != "OK" ]; then exit 1; fi
+checkfmt: RESULT ?= $(shell goimports -l $(GOFILES) | tee >(if [ "$$(wc -l)" = 0 ]; then echo "OK"; fi))
+checkfmt: SHELL  := /usr/bin/env bash
+checkfmt: ## Check formatting of all go files
+	@ $(MAKE) --no-print-directory log-$@
+	@ echo "$(RESULT)"
+	@ if [ "$(RESULT)" != "OK" ]; then exit 1; fi
 
 .PHONY: test
-test: log-test ## Run tests
-	go test -v $(GOPKGS)
+test: ## Run tests
+	@ $(MAKE) --no-print-directory log-$@
+	$(GOCMD) test $(MODVENDOR) -v $(GOPKGS)
+
+####################
+## Helper targets ##
+####################
+.PHONY: changelog
+changelog: NEXT ?=
+changelog: PUSH ?= false
+changelog: ## Generate Changelog
+	@ $(MAKE) --no-print-directory log-$@
+	git-chglog --config ./scripts/chglog/config-full-history.yml --tag-filter-pattern v[0-9]+.[0-9]+.[0-9]+$$ --output CHANGELOG.md $(NEXT)
+	@ git add CHANGELOG.md
+	@ git commit -m "Update Changelog"
+	@ if [ "$(PUSH)" = "true" ]; then git push origin master ; fi
+
+.PHONY: goimports
+goimports:
+ifeq (, $(shell which goimports))
+	GO111MODULE=off go get -u golang.org/x/tools/cmd/goimports
+endif
+
+.PHONY: golangci
+golangci:
+ifeq (, $(shell which golangci-lint))
+	curl -sfL https://install.goreleaser.com/github.com/golangci/golangci-lint.sh | sh -s  -- -b $(shell go env GOPATH)/bin $(GOLANGCI_VERSION)
+endif
+
+.PHONY: git-chglog
+git-chglog:
+ifeq (, $(shell which git-chglog))
+	curl -sfL https://github.com/git-chglog/git-chglog/releases/download/$(GITCHGLOG_VERSION)/git-chglog_$(shell go env GOOS)_$(shell go env GOARCH) -o $(shell go env GOPATH)/bin/git-chglog && chmod +x $(shell go env GOPATH)/bin/git-chglog
+endif
 
 .PHONY: tools
-tools: log-tools ## Install required tools
-	@cd $$GOPATH && curl -L https://git.io/vp6lP | sh # gometalinter
-	@cd /tmp && go get -v -u github.com/git-chglog/git-chglog/cmd/git-chglog # git-chglog
+tools: ## Install required tools
+	@ $(MAKE) --no-print-directory log-$@
+	@ $(MAKE) --no-print-directory goimports golangci git-chglog
 
 #####################
 ## Release targets ##
 #####################
-.PHONY: authors
-authors: log-authors ## Generate list of Authors
-	@echo "# Authors\n" > AUTHORS.md
-	git log --all --format='- %aN \<%aE\>' | sort -u | egrep -v noreply >> AUTHORS.md
-
-.PHONY: changelog
-changelog: log-changelog ## Generate content of Changelog
-	git-chglog --output CHANGELOG.md
-
 .PHONY: release patch minor major
 PATTERN =
 
-release: version ?= $(shell echo $(VERSION) | sed 's/^v//' | awk -F'[ .]' '{print $(PATTERN)}')
-release: push ?= false
-release: SHELL :=/bin/bash
-release: log-release ## Prepare Module release
-	@ if [ -z "$(version)" ]; then \
-		echo "Error: missing value for 'version'. e.g. 'make release version=x.y.z'"; \
-	elif [ "v$(version)" = "$(VERSION)" ] ; then \
-		echo "Error: provided version (v$(version)) exists."; \
-	else \
-		git tag --annotate --message "v$(version) Release" v$(version); \
-		echo "Tag v$(version) Release"; \
-		if [ $(push) = "true" ]; then \
-			git push origin v$(version); \
-			echo "Push v$(version) Release"; \
-		fi \
-	fi
+# if the last release was alpha, beta or rc, 'release' target has to used with current
+# cycle release. For example if latest tag is v0.8.0-rc.2 and v0.8.0 GA needs to get
+# released the following should be executed: "make release version=0.8.0"
+release: VERSION ?= $(shell echo $(GIT_VERSION) | sed 's/^v//' | awk -F'[ .]' '{print $(PATTERN)}')
+release: PUSH ?= false
+release: ## Prepare Module release
+	@ $(MAKE) --no-print-directory log-$@
+	@ ./scripts/release/release.sh "$(VERSION)" "$(PUSH)" "$(GIT_VERSION)" "1"
 
 patch: PATTERN = '\$$1\".\"\$$2\".\"\$$3+1'
 patch: release ## Prepare Module Patch release
@@ -107,9 +141,8 @@ major: release ## Prepare Module Major release
 ## Self-Documenting Makefile Help ##
 ####################################
 .PHONY: help
-.DEFAULT_GOAL := help
 help:
-	@grep -h -E '^[a-zA-Z_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "$(BLUE_COLOR)%-20s$(NO_COLOR) %s\n", $$1, $$2}'
+	@ grep -h -E '^[a-zA-Z0-9_-]+:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-20s\033[0m %s\n", $$1, $$2}'
 
 log-%:
-	@grep -h -E '^$*:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "$(BLUE_COLOR)==> %s$(NO_COLOR)\n", $$2}'
+	@ grep -h -E '^$*:.*?## .*$$' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m==> %s\033[0m\n", $$2}'
