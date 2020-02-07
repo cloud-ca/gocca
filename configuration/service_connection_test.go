@@ -3,11 +3,12 @@ package configuration
 import (
 	"encoding/json"
 
+	"testing"
+
 	"github.com/cloud-ca/gocca/mocks"
 	"github.com/cloud-ca/gocca/mocks/configuration_mocks"
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 var (

@@ -2,6 +2,7 @@ package configuration
 
 import (
 	"encoding/json"
+
 	"github.com/cloud-ca/gocca/api"
 )
 

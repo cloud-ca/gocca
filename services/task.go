@@ -2,9 +2,10 @@ package services
 
 import (
 	"encoding/json"
-	"github.com/cloud-ca/gocca/api"
 	"strings"
 	"time"
+
+	"github.com/cloud-ca/gocca/api"
 )
 
 //Task status

@@ -1,11 +1,12 @@
 package cloudca
 
 import (
+	"testing"
+
 	"github.com/cloud-ca/gocca/mocks"
 	"github.com/cloud-ca/gocca/mocks/services_mocks"
 	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/assert"
-	"testing"
 )
 
 func TestGetZoneByIdSuccess(t *testing.T) {
