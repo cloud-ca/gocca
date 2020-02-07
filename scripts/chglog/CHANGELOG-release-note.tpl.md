@@ -5,14 +5,16 @@
 {{ range .CommitGroups }}
 ### {{ .Title }}
 {{ range .Commits -}}
-{{ if not (contains .Subject "<code>") -}}
+{{ if and (not (contains .Subject "Merge pull request")) (not (contains .Subject "Merge branch")) -}}
 - {{ if .Scope }}**{{ .Scope }}:** {{ end }}{{ if .Subject }}{{ .Subject }}{{ else }}{{ .Header }}{{ end }}
 {{ end -}}
 {{ end -}}
 {{ end }}
 {{ else }}
 {{ range .Commits -}}
+{{ if and (not (contains .Header "Merge pull request")) (not (contains .Header "Merge branch")) -}}
 - {{ if .Scope }}**{{ .Scope }}:** {{ end }}{{ if .Subject }}{{ .Subject }}{{ else }}{{ .Header }}{{ end }}
+{{ end -}}
 {{ end }}
 {{ end -}}
 
