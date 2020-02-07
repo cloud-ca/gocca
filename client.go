@@ -1,10 +1,10 @@
 package cca
 
 import (
-	"github.com/cloud-ca/go-cloudca/api"
-	"github.com/cloud-ca/go-cloudca/configuration"
-	"github.com/cloud-ca/go-cloudca/services"
-	"github.com/cloud-ca/go-cloudca/services/cloudca"
+	"github.com/cloud-ca/gocca/api"
+	"github.com/cloud-ca/gocca/configuration"
+	"github.com/cloud-ca/gocca/services"
+	"github.com/cloud-ca/gocca/services/cloudca"
 )
 
 const (

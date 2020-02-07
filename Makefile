@@ -1,8 +1,8 @@
 # Project variables
-NAME        := go-cloudca
+NAME        := gocca
 DESCRIPTION := A cloud.ca client for the Go programming language
 VENDOR      := cloud.ca
-URL         := https://github.com/cloud-ca/go-cloudca
+URL         := https://github.com/cloud-ca/gocca
 LICENSE     := MIT
 
 # Build variables

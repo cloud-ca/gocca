@@ -1,4 +1,4 @@
-module github.com/cloud-ca/go-cloudca
+module github.com/cloud-ca/gocca
 
 go 1.12
 

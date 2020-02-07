@@ -2,7 +2,7 @@ package configuration
 
 import (
 	"encoding/json"
-	"github.com/cloud-ca/go-cloudca/api"
+	"github.com/cloud-ca/gocca/api"
 )
 
 type ServiceConnection struct {
