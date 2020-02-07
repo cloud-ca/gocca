@@ -4,7 +4,7 @@
 package api_mocks
 
 import (
-	"github.com/cloud-ca/go-cloudca/api"
+	"github.com/cloud-ca/gocca/api"
 	gomock "github.com/golang/mock/gomock"
 )
 

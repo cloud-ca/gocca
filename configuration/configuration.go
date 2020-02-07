@@ -1,7 +1,7 @@
 package configuration
 
 import (
-	"github.com/cloud-ca/go-cloudca/api"
+	"github.com/cloud-ca/gocca/api"
 )
 
 type ConfigurationService interface {

@@ -3,8 +3,8 @@ package cloudca
 import (
 	"encoding/json"
 
-	"github.com/cloud-ca/go-cloudca/api"
-	"github.com/cloud-ca/go-cloudca/services"
+	"github.com/cloud-ca/gocca/api"
+	"github.com/cloud-ca/gocca/services"
 )
 
 type Service struct {

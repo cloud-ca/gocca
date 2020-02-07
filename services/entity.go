@@ -1,7 +1,7 @@
 package services
 
 import (
-	"github.com/cloud-ca/go-cloudca/api"
+	"github.com/cloud-ca/gocca/api"
 )
 
 //A generic service to access any entity

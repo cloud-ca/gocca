@@ -1,8 +1,8 @@
-# go-cloudca
+# gocca
 
-[![GoDoc](https://godoc.org/github.com/cloud-ca/go-cloudca?status.svg)](https://godoc.org/github.com/cloud-ca/go-cloudca)
-[![Build Status](https://circleci.com/gh/cloud-ca/go-cloudca.svg?style=svg)](https://circleci.com/gh/cloud-ca/go-cloudca)
-[![license](https://img.shields.io/github/license/cloud-ca/go-cloudca.svg)](https://github.com/cloud-ca/go-cloudca/blob/master/LICENSE)
+[![GoDoc](https://godoc.org/github.com/cloud-ca/gocca?status.svg)](https://godoc.org/github.com/cloud-ca/gocca)
+[![Build Status](https://circleci.com/gh/cloud-ca/gocca.svg?style=svg)](https://circleci.com/gh/cloud-ca/gocca)
+[![license](https://img.shields.io/github/license/cloud-ca/gocca.svg)](https://github.com/cloud-ca/gocca/blob/master/LICENSE)
 
 A cloud.ca client for the Go programming language
 
@@ -11,10 +11,10 @@ A cloud.ca client for the Go programming language
 Import
 
 ```go
-import "github.com/cloud-ca/go-cloudca"
+import "github.com/cloud-ca/gocca"
 
 /* import the services you need */
-import "github.com/cloud-ca/go-cloudca/services/cloudca"
+import "github.com/cloud-ca/gocca/services/cloudca"
 ```
 
 Create a new CcaClient.
