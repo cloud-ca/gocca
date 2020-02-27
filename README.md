@@ -17,22 +17,22 @@ import "github.com/cloud-ca/gocca"
 import "github.com/cloud-ca/gocca/services/cloudca"
 ```
 
-Create a new CcaClient.
+Create a new Client.
 
 ```go
-ccaClient := cca.NewCcaClient("[your-api-key]")
+client := gocca.NewClient("[your-api-key]")
 ```
 
 Retrieve the list of environments
 
 ```go
-environments, _ := ccaClient.Environments.List()
+environments, _ := client.Environments.List()
 ```
 
 Get the ServiceResources object for a specific environment and service. Here, we assume that it is a cloudca service.
 
 ```go
-resources, _ := ccaClient.GetResources("[service-code]", "[environment-name]")
+resources, _ := client.GetResources("[service-code]", "[environment-name]")
 ccaResources := resources.(cloudca.Resources)
 ```
 
@@ -41,7 +41,7 @@ Now with the cloudca ServiceResources object, we can execute operations on cloud
 Retrieve the list of instances in the environment.
 
 ```go
-instances, _ := ccaResources.Instances.List()
+instances, _ := resources.Instances.List()
 ```
 
 Get a specific volume in the environment.
